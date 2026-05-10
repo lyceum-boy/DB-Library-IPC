@@ -1,0 +1,13 @@
+﻿book_id,isbn,title,publication_year,publisher_id,genre_id,language,page_count,cover_path
+1,978-5-389-07450-8,Мастер и Маргарита,2021,1,1,русский,480,covers/master_i_margarita.jpg
+2,978-5-17-118366-0,Белая гвардия,2020,3,1,русский,352,covers/belaya_gvardiya.jpg
+3,978-5-17-090537-9,Собачье сердце,2019,2,5,русский,192,covers/sobache_serdtse.jpg
+4,978-5-389-08789-8,Война и мир,2022,1,4,русский,1360,covers/voyna_i_mir.jpg
+5,978-5-17-099640-7,Анна Каренина,2021,3,4,русский,864,covers/anna_karenina.jpg
+6,978-5-04-089250-1,Преступление и наказание,2023,2,4,русский,672,covers/prestuplenie_i_nakazanie.jpg
+7,978-5-17-090538-6,Идиот,2018,2,4,русский,640,covers/idiot.jpg
+8,978-5-389-04986-5,Евгений Онегин,2020,1,4,русский,288,covers/evgeniy_onegin.jpg
+9,978-5-17-084861-4,Отцы и дети,2019,3,4,русский,352,covers/ottsy_i_deti.jpg
+10,978-5-17-100152-0,Мы,2021,3,3,русский,256,covers/my.jpg
+11,978-5-17-090539-3,Пикник на обочине,2022,2,3,русский,256,covers/piknik_na_obochine.jpg
+12,978-5-17-090540-9,Понедельник начинается в субботу,2021,2,3,русский,320,covers/ponedelnik_nachinaetsya_v_subbotu.jpg
