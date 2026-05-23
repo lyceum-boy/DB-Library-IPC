@@ -1,1 +1,2 @@
 psycopg[binary]>=3.2,<4.0
+prettytable>=3.11,<4.0
