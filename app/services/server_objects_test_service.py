@@ -11,7 +11,7 @@ from app.db import get_connection
 def _format_value(value: Any) -> str:
     """Преобразует значение из БД к удобному строковому представлению."""
     if value is None:
-        return "—"
+        return "–"
     return str(value)
 
 

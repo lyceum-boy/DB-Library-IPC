@@ -30,7 +30,7 @@ VIEWS_STATEMENTS: list[str] = [
     SELECT
         b.book_id,
         b.title AS book_title,
-        COALESCE(ab.authors, '—') AS authors,
+        COALESCE(ab.authors, '–') AS authors,
         g.name AS genre,
         p.name AS publisher,
         b.publication_year,

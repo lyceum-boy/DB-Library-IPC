@@ -27,7 +27,7 @@ copies_by_book AS (
 SELECT
   b.book_id,
   b.title AS book_title,
-  COALESCE(ab.authors, '—') AS authors,
+  COALESCE(ab.authors, '–') AS authors,
   g.name AS genre,
   p.name AS publisher,
   COALESCE(cb.total_copies, 0) AS total_copies,
@@ -84,7 +84,7 @@ SELECT
   COUNT(ri.book_id) AS book_title_count,
   SUM(ri.quantity) AS total_quantity,
   STRING_AGG(
-    b.title || ' — ' || ri.quantity || ' шт.',
+    b.title || ' – ' || ri.quantity || ' шт.',
     '; '
     ORDER BY b.title
   ) AS receipt_composition,
