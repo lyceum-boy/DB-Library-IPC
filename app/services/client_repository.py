@@ -458,6 +458,7 @@ class LibraryRepository:
                     )
                     receipt_id = int(cursor.fetchone()["receipt_id"])
                     self._replace_receipt_items(cursor, receipt_id, data["items"])
+                    self._ensure_receipt_copies(cursor, receipt_id, data["receipt_date"], data["items"])
                 connection.commit()
             except Exception:
                 connection.rollback()
@@ -593,6 +594,7 @@ class LibraryRepository:
                         (data["supplier_id"], data["employee_id"], data["receipt_date"], data["invoice_number"], data["total_amount"], receipt_id),
                     )
                     self._replace_receipt_items(cursor, receipt_id, data["items"])
+                    self._ensure_receipt_copies(cursor, receipt_id, data["receipt_date"], data["items"])
                 connection.commit()
             except Exception:
                 connection.rollback()
@@ -915,6 +917,32 @@ class LibraryRepository:
                 """,
                 (receipt_id, item["book_id"], item["quantity"], item["unit_price"]),
             )
+
+    def _ensure_receipt_copies(self, cursor: Any, receipt_id: int, receipt_date: date, items: Iterable[Row]) -> None:
+        for item in items:
+            book_id = int(item["book_id"])
+            required_quantity = int(item["quantity"])
+            cursor.execute(
+                """
+                    SELECT COUNT(*) AS existing_count
+                    FROM copies
+                    WHERE receipt_id = %s AND book_id = %s;
+                """,
+                (receipt_id, book_id),
+            )
+            row = cursor.fetchone()
+            existing_count = int(row["existing_count"] if isinstance(row, dict) else row[0])
+            missing_count = required_quantity - existing_count
+            for _ in range(max(missing_count, 0)):
+                cursor.execute(
+                    """
+                        INSERT INTO copies (
+                            book_id, receipt_id, arrival_date, condition_state, status, storage_location
+                        )
+                        VALUES (%s, %s, %s, 'новое', 'доступен', 'Абонемент A-01');
+                    """,
+                    (book_id, receipt_id, receipt_date),
+                )
 
     def _insert_returning_id(self, query: str, params: tuple[Any, ...]) -> int:
         with get_connection() as connection:
